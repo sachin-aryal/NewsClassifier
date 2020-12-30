@@ -4,172 +4,151 @@
     <meta charset="UTF-8">
     <title>News Classifier</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <style>
-
-    .navbar {
-
-    padding:10px 10px;
-    text-align:center;
-    font-color:white;
- background: linear-gradient(to bottom, #3333ff 0%, #ccccff 80%);
-
-        }
-        .btn {
-  border: none;
-  outline: none;
-  padding: 10px 16px;
-  background-color:#6666ff;
-  cursor: pointer;}
-  .more {
-  display: none;
-  }
-</style>
-    <style>
-    .addReadMore.showlesscontent .SecSec,
-    .addReadMore.showlesscontent .readLess {
-        display: none;
-    }
-
-    .addReadMore.showmorecontent .readMore {
-        display: none;
-    }
-
-    .addReadMore .readMore,
-    .addReadMore .readLess {
-        margin-left: 2px;
-        color: blue;
-        cursor: pointer;
-    }
-
-    .addReadMoreWrapTxt.showmorecontent .SecSec,
-    .addReadMoreWrapTxt.showmorecontent .readLess {
-        display: block;
-    }
-    #news-class{
-        margin: 20px;
-    }
-    .
-    </style>
-
-
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}"/>
 </head>
 <body>
 
-<nav class="navbar  sticky-top navbar-expand-lg flex-grow-2 ">
-
-  </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <p style="margin-right:50px"><span id="datetime"></span></p>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-
-                <a class="btn" href="..." style="color:white;font-size:20px"><i class="fas fa-home"></i>Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-        <a class="nav-link" href="fortunate.html" style="color:white;font-size:20px">Fortunate</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="unfortunate.html" style="color:white;font-size:20px">Unfortunate</a>
-      </li>
-            <li class="nav-item">
-        <a class="nav-link" href="#" style="color:white;font-size:20px">Neutral</a>
-      </li>
-        </ul>
+<div class="top-bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="tb-contact">
+                    <p><i class="fa fa-envelope"></i>info@mail.com</p>
+                    <p><i class="fa fa-phone"></i>+012 345 6789</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <img src="../image/download.jpg">
+</div>
 
-    <h1 style=";color:white;padding-right:570px">News Classifier</h1>
+<div class="brand">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6">
+                <div class="b-logo">
+                    <a href="#">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}">
+                    </a>
+                </div>
+                <p id="today"></p>
+            </div>
+        </div>
+    </div>
+</div>
 
- <img src="../image/download.jpg">
-</nav>
+<div class="nav-bar">
+    <div class="container">
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            <a href="#all" class="navbar-brand">MENU</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav mr-auto">
+                    <a href="#all" class="nav-item nav-link">Home</a>
+                    <a href="#fortunate" class="nav-item nav-link">Fortunate</a>
+                    <a href="#unfortunate" class="nav-item nav-link">Unfortunate</a>
+                    <a href="#neutral" class="nav-item nav-link">Neutral</a>
+                </div>
+                <div class="social ml-auto">
+                    <a href="https://twitter.com/home"><i class="fa fa-twitter"></i></a>
+                    <a href="https://www.facebook.com/"><i class="fa fa-facebook-f"></i></a>
+                    <a href="https://instagram.com/"><i class="fa fa-instagram"></i></a>
+                    <a href="https://youtube.com/"><i class="fa fa-youtube"></i></a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
 
 <div class="container">
-    <div class="row">
-        <div class="offset-4 col-md-3">
-            <p style="margin-bottom:-15px;font-size:20px;margin-left:20px">Choose the news category</p>
-            <select class="form-control" id="news-class">
-                <option value="all">All</option>
-                <option value="fortunate">Fortunate</option>
-                <option value="unfortunate">Unfortunate</option>
-                <option value="neutral">Neutral</option>
-            </select>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
+    <div class="row news-content">
         {% for title, content in news_content.items() %}
-        <div class="col-md-6  {{ content[1] }}-category ">
-
-
-            <h1 style="font-family:Verdana (sans-serif);font-size:28px"> {{ title }} </h1>
-            <p class="addReadMore showlesscontent" style="fontsize:20px;text-align:justify"> {{ content[0] }} </p>
-        </div>
+            <div class="col-md-6  {{ content[1] }}-category">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ title }}</h5>
+                        <p class="card-text addReadMore showlesscontent">{{ content[0] }}</p>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
     </div>
 </div>
 <script>
+    function AddReadMore() {
+        //This limit you can set after how much characters you want to show Read More.
+        var carLmt = 280;
+        // Text to show when text is collapsed
+        var readMoreTxt = " Read More";
+        // Text to show when text is expanded
+        var readLessTxt = " Read Less";
+        //Traverse all selectors with this class and manupulate HTML part to show Read More
+        $(".addReadMore").each(function() {
+            if ($(this).find(".firstSec").length)
+                return;
 
-function AddReadMore() {
-    //This limit you can set after how much characters you want to show Read More.
-    var carLmt = 280;
-    // Text to show when text is collapsed
-    var readMoreTxt = " Read More";
-    // Text to show when text is expanded
-    var readLessTxt = " Read Less";
+            var allstr = $(this).text();
+            if (allstr.length > carLmt) {
+                var firstSet = allstr.substring(0, carLmt);
+                var secdHalf = allstr.substring(carLmt, allstr.length);
+                var strtoadd = firstSet + "<span class='SecSec'>" + secdHalf + "</span><span class='readMore'  title='Click to Show More'>" + readMoreTxt + "</span><span class='readLess' title='Click to Show Less'>" + readLessTxt + "</span>";
+                $(this).html(strtoadd);
+            }
 
-
-    //Traverse all selectors with this class and manupulate HTML part to show Read More
-    $(".addReadMore").each(function() {
-        if ($(this).find(".firstSec").length)
-            return;
-
-        var allstr = $(this).text();
-        if (allstr.length > carLmt) {
-            var firstSet = allstr.substring(0, carLmt);
-            var secdHalf = allstr.substring(carLmt, allstr.length);
-            var strtoadd = firstSet + "<span class='SecSec'>" + secdHalf + "</span><span class='readMore'  title='Click to Show More'>" + readMoreTxt + "</span><span class='readLess' title='Click to Show Less'>" + readLessTxt + "</span>";
-            $(this).html(strtoadd);
-        }
-
+        });
+        //Read More and Read Less Click Event binding
+        $(document).on("click", ".readMore,.readLess", function() {
+            $(this).closest(".addReadMore").toggleClass("showlesscontent showmorecontent");
+        });
+    }
+    $(function() {
+        //Calling function after Page Load
+        AddReadMore();
+        $(".nav-item").on("click", function(){
+            let val = $(this).attr("href").substring(1);
+            if(val === "all"){
+                $(".1-category").show();
+                $(".-1-category").show();
+                $(".0-category").show();
+            }else if(val === "fortunate"){
+                $(".1-category").show();
+                $(".-1-category").hide();
+                $(".0-category").hide();
+            }else if(val === "unfortunate"){
+                $(".1-category").hide();
+                $(".-1-category").show();
+                $(".0-category").hide();
+            }else if(val === "neutral"){
+                $(".1-category").hide();
+                $(".-1-category").hide();
+                $(".0-category").show();
+            }
+        })
+        updateDate();
+        setInterval(function (){
+            updateDate();
+        }, 1000)
     });
-    //Read More and Read Less Click Event binding
-    $(document).on("click", ".readMore,.readLess", function() {
-        $(this).closest(".addReadMore").toggleClass("showlesscontent showmorecontent");
-    });
-}
-$(function() {
-    //Calling function after Page Load
-    AddReadMore();
-    $("#news-class").on("change", function(){
-        if($(this).val() === "all"){
-            $(".1-category").show();
-            $(".-1-category").show();
-            $(".0-category").show();
-        }else if($(this).val() === "fortunate"){
-            $(".1-category").show();
-            $(".-1-category").hide();
-            $(".0-category").hide();
-        }else if($(this).val() === "unfortunate"){
-            $(".1-category").hide();
-            $(".-1-category").show();
-            $(".0-category").hide();
-        }else if($(this).val() === "neutral"){
-            $(".1-category").hide();
-            $(".-1-category").hide();
-            $(".0-category").show();
-        }
-    })
-});
 
+    function updateDate(){
+        $("#today").text(new Date());
+    }
 </script>
-<script>
-var dt = new Date();
-document.getElementById("datetime").innerHTML = (("0"+dt.getDate()).slice(-2)) +"."+ (("0"+(dt.getMonth()+1)).slice(-2)) +"."+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()).slice(-2)) +":"+ (("0"+dt.getMinutes()).slice(-2));
-</script>
+<div class="footer-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 copyright">
+                <p>Copyright © <a href="#">News Classifier Pvt.Ltd</a>. All Rights Reserved</p>
+            </div>
+            <div class="col-md-6 template-by">
+                <p>Application Maintained By <a rel="nofollow noopener" href="#">pkhadka@lbef.edu.np</a></p>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 
