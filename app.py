@@ -1,6 +1,6 @@
 import pickle
 
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template
 from lib import kathmandu_post, nb_predictor
 
 app = Flask(__name__)
@@ -9,24 +9,14 @@ app.loaded_model = pickle.load(open('lib/classification.model', 'rb'))
 
 
 @app.route('/')
-def hello_world():
-    return render_template('index.html')
-
-
-@app.route("/news")
-def get_news():
+def index():
     news = kathmandu_post.scrape()
-    print(len(news))
-    news_class = {
-        1: [],
-        0: [],
-        -1: [],
-    }
-    for title in news:
-        result = nb_predictor.predict(title)[0]
-        news_class[result].append(title)
-    return jsonify(news_class)
+    news_content = {}
+    for title, content in news.items():
+        sentiment_class = nb_predictor.predict(title)[0]
+        news_content[title] = [content, sentiment_class]
+    return render_template('index.html', **{"news_content": news_content})
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
